@@ -1,5 +1,5 @@
 import "./App.scss";
-import { useState, useReducer } from "react";
+import { useState } from "react";
 import SignIn from "./components/signin-button";
 import StorageHandler from "./components/Storage";
 
