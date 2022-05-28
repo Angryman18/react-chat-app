@@ -64,11 +64,11 @@ const SignIn = ({ getLoggedUser }) => {
             text='Sign in With Github'
             handler={signInHandler(new GithubAuthProvider())}
           />
-          {/* <SignInButton
+          <SignInButton
             icon={twitterIcon}
             text='Sign in With Twitter'
             handler={signInHandler(new TwitterAuthProvider())}
-          /> */}
+          />
         </div>
       </div>
     </>
