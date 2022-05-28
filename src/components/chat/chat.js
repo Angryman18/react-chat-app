@@ -31,7 +31,7 @@ const DisplayChat = ({ user, setLoggedUser }) => {
         setLoading(false);
       }
     );
-  }, [db]);
+  }, [db, message.length]);
 
   const signOutHandler = async (e) => {
     e.preventDefault();
