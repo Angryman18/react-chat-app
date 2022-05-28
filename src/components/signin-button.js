@@ -27,7 +27,6 @@ const SignIn = ({ getLoggedUser }) => {
     setError(null);
     return signInWithPopup(auth, provider)
       .then((result) => {
-        console.log("this is result", result);
         const user = result.user;
         getLoggedUser(StorageHandler.saveLocalStorage(user));
       })
@@ -65,11 +64,11 @@ const SignIn = ({ getLoggedUser }) => {
             text='Sign in With Github'
             handler={signInHandler(new GithubAuthProvider())}
           />
-          <SignInButton
+          {/* <SignInButton
             icon={twitterIcon}
             text='Sign in With Twitter'
             handler={signInHandler(new TwitterAuthProvider())}
-          />
+          /> */}
         </div>
       </div>
     </>

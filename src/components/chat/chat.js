@@ -20,12 +20,15 @@ const DisplayChat = ({ user, setLoggedUser }) => {
   const db = getFirestore(firebase);
   const auth = getAuth(firebase);
   const [message, setMessage] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    if (!message.length) setLoading(true);
     onSnapshot(
       query(collection(db, "messages"), orderBy("createdAt")),
       (item) => {
         setMessage(item.docs.map((doc) => doc.data()));
+        setLoading(false);
       }
     );
   }, [db]);
@@ -43,13 +46,17 @@ const DisplayChat = ({ user, setLoggedUser }) => {
   };
 
   return (
-    <div className="w-[600px]">
+    <div className='w-[600px]'>
       <DisplayChat.ChatHeader
         signOutHandler={signOutHandler}
         userImage={user?.photoURL}
         displayName={user?.displayName}
       />
-      <DisplayChat.ChatBody message={message} uid={user?.uid} />
+      <DisplayChat.ChatBody
+        loading={loading}
+        message={message}
+        uid={user?.uid}
+      />
       <DisplayChat.ChatFooter photoURL={user?.photoURL} uid={user?.uid} />
     </div>
   );

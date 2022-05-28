@@ -34,6 +34,13 @@ const ChatFooter = ({ photoURL, uid }) => {
     }
   };
 
+  const handleClickSend = e => {
+    if (message.trim() !== "") {
+      sendMessage();
+      setMessage("");
+    }
+  }
+
   return (
     <div className='fixed bottom-0 left-1/2 -translate-x-1/2 bg-white'>
       <div className='flex pb-4 justify-center w-screen sm:w-[600px]'>
@@ -42,9 +49,9 @@ const ChatFooter = ({ photoURL, uid }) => {
           onChange={(e) => setMessage(e.target.value)}
           value={message}
           placeholder='Start typing . . .'
-          className='w-full text-lg border outline-none rounded-full h-12 py-auto flex items-center pl-4 pr-12 overflow-hidden resize-none'
+          className='w-full text-lg border outline-none rounded-full h-12 py-2 flex items-center pl-4 pr-12 overflow-hidden resize-none'
         ></textarea>
-        <div className='absolute right-0 h-12 cursor-pointer rounded-r-full w-16 flex items-center justify-center'>
+        <div onClick={handleClickSend} className='absolute active:bg-gray-100 right-0 h-12 cursor-pointer rounded-r-full w-16 flex items-center justify-center'>
           <svg width='40px' height='30px' viewBox='0 0 20 18' version='1.1'>
             <g
               id='Icons'
