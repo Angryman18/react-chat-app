@@ -20,7 +20,7 @@ function App(props) {
   );
 }
 
-const connect = (retrivalHandler) => (Component) => {
+const syncData = (retrivalHandler) => (Component) => {
   return () => <Component user={retrivalHandler()} />;
 };
-export default connect(StorageHandler.retrieveFromLocalStorage)(App);
+export default syncData(StorageHandler.retrieveFromLocalStorage)(App);

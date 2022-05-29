@@ -1,5 +1,6 @@
 
 import { useState } from "react";
+import user from '../../images/user.png'
 
 const User = ({ userImage }) => {
 
@@ -11,7 +12,7 @@ const User = ({ userImage }) => {
 
   const onErrorHandler = (e) => {
     console.log("image display error");
-    setCurrImage(userImage)
+    setCurrImage(user)
   };
 
   return (

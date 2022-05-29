@@ -19,16 +19,17 @@ import ChatBody from "./chat-body";
 const DisplayChat = ({ user, setLoggedUser }) => {
   const db = getFirestore(firebase);
   const auth = getAuth(firebase);
-  const [message, setMessage] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState({ message: [], loading: false });
 
   useEffect(() => {
-    if (!message.length) setLoading(true);
+    if (!message.length) setMessage({ message: [], loading: true });
     onSnapshot(
       query(collection(db, "messages"), orderBy("createdAt")),
       (item) => {
-        setMessage(item.docs.map((doc) => doc.data()));
-        setLoading(false);
+        setMessage({
+          message: item.docs.map((doc) => ({...doc.data(), id: doc.id})),
+          loading: false,
+        });
       }
     );
   }, [db, message.length]);
@@ -53,11 +54,15 @@ const DisplayChat = ({ user, setLoggedUser }) => {
         displayName={user?.displayName}
       />
       <DisplayChat.ChatBody
-        loading={loading}
-        message={message}
+        loading={message.loading}
+        message={message.message ?? []}
         uid={user?.uid}
       />
-      <DisplayChat.ChatFooter photoURL={user?.photoURL} uid={user?.uid} />
+      <DisplayChat.ChatFooter
+        displayName={user?.displayName}
+        photoURL={user?.photoURL}
+        uid={user?.uid}
+      />
     </div>
   );
 };

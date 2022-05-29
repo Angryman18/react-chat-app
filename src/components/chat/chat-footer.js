@@ -7,7 +7,7 @@ import {
 } from "firebase/firestore";
 import { useState } from "react";
 
-const ChatFooter = ({ photoURL, uid }) => {
+const ChatFooter = ({ photoURL, uid, displayName }) => {
   const [message, setMessage] = useState("");
 
   const db = getFirestore(firebase);
@@ -15,9 +15,10 @@ const ChatFooter = ({ photoURL, uid }) => {
   const sendMessage = async () => {
     await addDoc(collection(db, "messages"), {
       text: message,
-      photoURL: photoURL,
-      uid: uid,
+      photoURL,
+      uid,
       createdAt: Timestamp.now(),
+      displayName,
     });
   };
 
